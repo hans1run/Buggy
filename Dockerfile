@@ -1,7 +1,7 @@
 FROM node:23-alpine AS build
 WORKDIR /app
 COPY package.json package-lock.json* ./
-RUN npm ci
+RUN npm install
 COPY . .
 ARG VITE_API_BASE_URL=https://buggy.wplan.no/api
 ARG VITE_AUTH0_DOMAIN=hans1.eu.auth0.com
