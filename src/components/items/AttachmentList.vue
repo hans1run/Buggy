@@ -61,13 +61,9 @@ async function loadAttachments() {
   }
 }
 
-async function openAttachment(attachmentId: string) {
-  try {
-    const url = await attachmentService.getUrl(attachmentId)
-    window.open(url, '_blank')
-  } catch (err) {
-    console.error('Failed to get attachment URL', err)
-  }
+function openAttachment(attachmentId: string) {
+  const baseUrl = import.meta.env.VITE_API_BASE_URL || '/api'
+  window.open(`${baseUrl}/attachments/${attachmentId}/download`, '_blank')
 }
 
 async function deleteAttachment(attachmentId: string) {
