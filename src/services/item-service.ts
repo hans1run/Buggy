@@ -18,5 +18,9 @@ export const itemService = {
   updateStatus: (projectId: string, itemNumber: number, status: BacklogItemStatus) =>
     apiClient.put<BacklogItem>(`/projects/${projectId}/items/${itemNumber}/status`, { status }).then(r => r.data),
   archive: (projectId: string, itemNumber: number) =>
-    apiClient.put(`/projects/${projectId}/items/${itemNumber}/archive`)
+    apiClient.put(`/projects/${projectId}/items/${itemNumber}/archive`),
+  getArchived: (projectId: string) =>
+    apiClient.get<BacklogItem[]>(`/projects/${projectId}/items/archived`).then(r => r.data),
+  unarchive: (projectId: string, itemNumber: number) =>
+    apiClient.put<BacklogItem>(`/projects/${projectId}/items/${itemNumber}/unarchive`).then(r => r.data)
 }

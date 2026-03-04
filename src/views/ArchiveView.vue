@@ -73,7 +73,6 @@ import TypeBadge from '../components/common/TypeBadge.vue'
 import PriorityBadge from '../components/common/PriorityBadge.vue'
 import { useProjectStore } from '../stores/project'
 import { itemService } from '../services/item-service'
-import { BacklogItemStatus } from '../types'
 import type { BacklogItem } from '../types'
 
 const route = useRoute()
@@ -104,8 +103,7 @@ watch(
 async function loadArchived(projectId: string) {
   isLoading.value = true
   try {
-    const allItems = await itemService.getByProject(projectId)
-    archivedItems.value = allItems.filter(i => i.isArchived)
+    archivedItems.value = await itemService.getArchived(projectId)
   } catch (err) {
     console.error('Failed to load archived items', err)
   } finally {
@@ -116,11 +114,7 @@ async function loadArchived(projectId: string) {
 async function restore(item: BacklogItem) {
   if (!projectStore.currentProjectId) return
   try {
-    await itemService.updateStatus(
-      projectStore.currentProjectId,
-      item.itemNumber,
-      BacklogItemStatus.Backlog
-    )
+    await itemService.unarchive(projectStore.currentProjectId, item.itemNumber)
     archivedItems.value = archivedItems.value.filter(i => i.id !== item.id)
   } catch (err) {
     console.error('Failed to restore item', err)

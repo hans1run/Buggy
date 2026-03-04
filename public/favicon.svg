@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Bug body -->
+  <ellipse cx="32" cy="38" rx="14" ry="16" fill="#e74c3c"/>
+  <!-- Bug head -->
+  <circle cx="32" cy="20" r="8" fill="#2c3e50"/>
+  <!-- Eyes -->
+  <circle cx="29" cy="18" r="2" fill="white"/>
+  <circle cx="35" cy="18" r="2" fill="white"/>
+  <!-- Antennae -->
+  <line x1="28" y1="13" x2="22" y2="5" stroke="#2c3e50" stroke-width="2" stroke-linecap="round"/>
+  <line x1="36" y1="13" x2="42" y2="5" stroke="#2c3e50" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="22" cy="5" r="2" fill="#2c3e50"/>
+  <circle cx="42" cy="5" r="2" fill="#2c3e50"/>
+  <!-- Legs -->
+  <line x1="19" y1="32" x2="10" y2="26" stroke="#2c3e50" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="19" y1="38" x2="8" y2="38" stroke="#2c3e50" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="19" y1="44" x2="10" y2="50" stroke="#2c3e50" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="45" y1="32" x2="54" y2="26" stroke="#2c3e50" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="45" y1="38" x2="56" y2="38" stroke="#2c3e50" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="45" y1="44" x2="54" y2="50" stroke="#2c3e50" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Body stripe -->
+  <line x1="22" y1="34" x2="42" y2="34" stroke="#c0392b" stroke-width="1.5"/>
+  <line x1="20" y1="40" x2="44" y2="40" stroke="#c0392b" stroke-width="1.5"/>
+  <line x1="22" y1="46" x2="42" y2="46" stroke="#c0392b" stroke-width="1.5"/>
+</svg>

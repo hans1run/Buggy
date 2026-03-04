@@ -47,3 +47,17 @@ jobs:
             VITE_AUTH0_DOMAIN=${{ vars.VITE_AUTH0_DOMAIN }}
             VITE_AUTH0_CLIENT_ID=${{ vars.VITE_AUTH0_CLIENT_ID }}
             VITE_AUTH0_AUDIENCE=${{ vars.VITE_AUTH0_AUDIENCE }}
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_KEY }}
+          script: |
+            docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+            cd ~/buggy && docker compose up -d frontend
