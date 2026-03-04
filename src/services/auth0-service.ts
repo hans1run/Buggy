@@ -1,6 +1,13 @@
 import { ref, watch, computed } from 'vue'
 import { useAuth0 } from '@auth0/auth0-vue'
 
+// Shared token refresh function accessible outside Vue components (e.g. API interceptor)
+let _getAccessTokenSilently: (() => Promise<string>) | null = null
+
+export function getTokenSilently(): Promise<string> | null {
+  return _getAccessTokenSilently?.() ?? null
+}
+
 export const useAuth0Service = () => {
   const {
     loginWithRedirect,
@@ -10,6 +17,8 @@ export const useAuth0Service = () => {
     isLoading,
     getAccessTokenSilently
   } = useAuth0()
+
+  _getAccessTokenSilently = getAccessTokenSilently
 
   const token = ref<string | null>(localStorage.getItem('auth_token'))
   const error = ref<string | null>(null)
