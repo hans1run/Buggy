@@ -2,6 +2,7 @@
   <div
     class="card"
     :class="[`card--${item.type.toLowerCase()}`]"
+    :data-item-number="item.itemNumber"
     @click="$emit('click', item)"
   >
     <div class="card__header">

@@ -99,12 +99,12 @@ async function onQuickAdd(payload: { title: string; status: BacklogItemStatus })
   }
 }
 
-async function onStatusChange(payload: { item: BacklogItem; newStatus: BacklogItemStatus }) {
+async function onStatusChange(payload: { itemNumber: number; newStatus: BacklogItemStatus }) {
   if (!projectStore.currentProjectId) return
   try {
     await boardStore.updateItemStatus(
       projectStore.currentProjectId,
-      payload.item.itemNumber,
+      payload.itemNumber,
       payload.newStatus
     )
   } catch (err) {

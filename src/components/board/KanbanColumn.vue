@@ -40,7 +40,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   'quick-add': [payload: { title: string; status: BacklogItemStatus }]
   'item-click': [item: BacklogItem]
-  'status-change': [payload: { item: BacklogItem; newStatus: BacklogItemStatus }]
+  'status-change': [payload: { itemNumber: number; newStatus: BacklogItemStatus }]
 }>()
 
 const localItems = ref<BacklogItem[]>([...props.items])
@@ -61,9 +61,9 @@ watch(
 )
 
 function onAdd(evt: SortableEvent) {
-  const item = localItems.value[evt.newIndex!]
-  if (item) {
-    emit('status-change', { item, newStatus: props.status })
+  const itemNumber = Number(evt.item.dataset.itemNumber)
+  if (itemNumber) {
+    emit('status-change', { itemNumber, newStatus: props.status })
   }
 }
 </script>
