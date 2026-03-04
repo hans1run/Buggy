@@ -61,6 +61,9 @@ watch(
 )
 
 function onAdd(evt: SortableEvent) {
+  // Remove the DOM element sortablejs inserted — Vue will render from store data
+  evt.item.remove()
+
   const itemNumber = Number(evt.item.dataset.itemNumber)
   if (itemNumber) {
     emit('status-change', { itemNumber, newStatus: props.status })
