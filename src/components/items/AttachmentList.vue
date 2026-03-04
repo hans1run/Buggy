@@ -41,6 +41,7 @@ import { ref, onMounted } from 'vue'
 import Button from 'primevue/button'
 import type { Attachment } from '../../types'
 import { attachmentService } from '../../services/attachment-service'
+import apiClient from '../../services/api'
 
 const props = defineProps<{
   itemId: string
@@ -61,9 +62,18 @@ async function loadAttachments() {
   }
 }
 
-function openAttachment(attachmentId: string) {
-  const baseUrl = import.meta.env.VITE_API_BASE_URL || '/api'
-  window.open(`${baseUrl}/attachments/${attachmentId}/download`, '_blank')
+async function openAttachment(attachmentId: string) {
+  try {
+    const response = await apiClient.get(`/attachments/${attachmentId}/download`, {
+      responseType: 'blob'
+    })
+    const blob = new Blob([response.data], { type: response.headers['content-type'] })
+    const url = URL.createObjectURL(blob)
+    window.open(url, '_blank')
+    setTimeout(() => URL.revokeObjectURL(url), 60000)
+  } catch (err) {
+    console.error('Failed to download attachment', err)
+  }
 }
 
 async function deleteAttachment(attachmentId: string) {
